@@ -1,4 +1,4 @@
-# Qt project file - qmake uses his to generate a Makefile
+# Qt project file - qmake uses this to generate a Makefile
 
 QT       += core gui
 
