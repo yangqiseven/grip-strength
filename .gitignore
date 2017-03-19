@@ -2,3 +2,4 @@
 moc_window.cpp
 grip-strength.pro.user
 Makefile
+build/
