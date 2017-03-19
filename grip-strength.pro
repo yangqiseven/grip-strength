@@ -11,6 +11,13 @@ TARGET = grip-strength
 greaterThan(QT_MAJOR_VERSION, 4): LIBS += -lqwt-qt5 -lm
 lessThan(QT_MAJOR_VERSION, 5): LIBS += -lqwt -lm
 
-HEADERS += window.h adcreader.h
+HEADERS += adcreader.h \
+    mainwindow.h \
+    qcustomplot.h
 
-SOURCES += main.cpp window.cpp adcreader.cpp
+SOURCES += main.cpp adcreader.cpp \
+    mainwindow.cpp \
+    qcustomplot.cpp
+
+FORMS += \
+    mainwindow.ui

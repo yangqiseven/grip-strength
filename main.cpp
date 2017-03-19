@@ -1,18 +1,14 @@
-#include <window.h>
-
 #include <QApplication>
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
-	QApplication app(argc, argv);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+  QApplication::setGraphicsSystem("raster");
+#endif
+  QApplication a(argc, argv);
+  MainWindow w;
+  w.show();
 
-	// create the window
-	Window window;
-    window.showMaximized();
-
-	// call the window.timerEvent function every 40 ms
-	window.startTimer(40);
-
-	// execute the application
-	return app.exec();
+  return a.exec();
 }
