@@ -7,20 +7,27 @@
 Window::Window() : gain(5), count(0)
 {
 	// set up the initial plot data
-	for( int index=0; index<plotDataSize; ++index )
+    for( int index=0; index<plotDataSize; ++index )
 	{
 		xData[index] = index;
-		yData[index] = gain * sin( M_PI * index/50 );
+        yMData[index] = gain * sin( M_PI * index/50 );
+        yFData[index] = gain * cos( M_PI * index/50 );
 	}
 
-	curve = new QwtPlotCurve;
-	plot = new QwtPlot;
+    curveM = new QwtPlotCurve;
+    plotM = new QwtPlot;
+    curveF = new QwtPlotCurve;
+    plotF = new QwtPlot;
 	// make a plot curve from the data and attach it to the plot
-	curve->setSamples(xData, yData, plotDataSize);
-	curve->attach(plot);
+    curveM->setSamples(xData, yMData, plotDataSize);
+    curveM->attach(plotM);
+    curveF->setSamples(xData, yFData, plotDataSize);
+    curveF->attach(plotF);
 
-	plot->replot();
-	plot->show();
+    plotM->replot();
+    plotM->show();
+    plotF->replot();
+    plotF->show();
 
 
     // set up the layout - knob above thermometer
@@ -31,7 +38,9 @@ Window::Window() : gain(5), count(0)
     // plot to the left of knob and thermometer
 	hLayout = new QHBoxLayout;
     //hLayout->addLayout(vLayout);
-    hLayout->addWidget(plot);
+    hLayout->addWidget(plotM);
+    hLayout->addWidget(plotF);
+
 
 	setLayout(hLayout);
 
@@ -54,14 +63,20 @@ Window::~Window() {
 
 void Window::timerEvent( QTimerEvent * )
 {
-	double inVal = gain * sin( M_PI * count/50.0 );
+    double inValM = gain * sin( M_PI * count/50.0 );
+    double inValF = gain * cos( M_PI * count/50.0 );
 	++count;
 
 	// add the new input to the plot
-	memmove( yData, yData+1, (plotDataSize-1) * sizeof(double) );
-	yData[plotDataSize-1] = inVal;
-	curve->setSamples(xData, yData, plotDataSize);
-	plot->replot();
+    memmove( yMData, yMData+1, (plotDataSize-1) * sizeof(double) );
+    yMData[plotDataSize-1] = inValM;
+    curveM->setSamples(xData, yMData, plotDataSize);
+    plotM->replot();
+
+    memmove( yFData, yFData+1, (plotDataSize-1) * sizeof(double) );
+    yFData[plotDataSize-1] = inValF;
+    curveF->setSamples(xData, yFData, plotDataSize);
+    plotF->replot();
 }
 
 
