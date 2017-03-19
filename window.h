@@ -28,8 +28,8 @@ public slots:
 
 // internal variables for the window class
 private:
-	QwtKnob      *knob;
-	QwtThermo    *thermo;
+    //QwtKnob      *knob;
+    //QwtThermo    *thermo;
 	QwtPlot      *plot;
 	QwtPlotCurve *curve;
 
