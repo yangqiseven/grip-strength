@@ -1,5 +1,7 @@
 *.o
-moc_window.cpp
+moc*
 grip-strength.pro.user
 Makefile
 build/
+ui*
+grip-strength
