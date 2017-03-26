@@ -1,5 +1,9 @@
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef RINGBUFFER_H
 #define RINGBUFFER_H
 
@@ -57,3 +61,7 @@ inline ring_buffer_size_t ring_buffer_num_items(ring_buffer_t *buffer) {
 }
 
 #endif /* RINGBUFFER_H */
+
+#ifdef __cplusplus
+}
+#endif
