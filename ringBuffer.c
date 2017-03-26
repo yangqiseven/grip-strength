@@ -5,7 +5,7 @@ void ring_buffer_init(ring_buffer_t *buffer) {
   buffer->head_index = 0;
 }
 
-void ring_buffer_queue(ring_buffer_t *buffer, char data) {
+void ring_buffer_queue(ring_buffer_t *buffer, uint8_t data) {
 
   if(ring_buffer_is_full(buffer)) {
     buffer->tail_index = ((buffer->tail_index + 1) & RING_BUFFER_MASK);
@@ -15,7 +15,7 @@ void ring_buffer_queue(ring_buffer_t *buffer, char data) {
   buffer->head_index = ((buffer->head_index + 1) & RING_BUFFER_MASK);
 }
 
-ring_buffer_size_t ring_buffer_dequeue(ring_buffer_t *buffer, char *data) {
+ring_buffer_size_t ring_buffer_dequeue(ring_buffer_t *buffer, uint8_t *data) {
   if(ring_buffer_is_empty(buffer)) {
     return 0;
   }

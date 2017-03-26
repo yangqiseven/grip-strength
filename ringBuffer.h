@@ -37,10 +37,10 @@ void ring_buffer_init(ring_buffer_t *buffer);
 
 // Adds a byte to a ring buffer.
 
-void ring_buffer_queue(ring_buffer_t *buffer, char data);
+void ring_buffer_queue(ring_buffer_t *buffer, uint8_t data);
 
 // Returns the oldest byte in a ring buffer.
-uint8_t ring_buffer_dequeue(ring_buffer_t *buffer, char *data);
+uint8_t ring_buffer_dequeue(ring_buffer_t *buffer, uint8_t *data);
 
 // Returns whether a ring buffer is empty.
 
