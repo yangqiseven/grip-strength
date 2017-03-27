@@ -1,10 +1,9 @@
 #include <QApplication>
+#include <QDebug>
 #include "mainwindow.h"
 #include "ringBuffer.h"
 #include "adcreader.h"
-//#include "global.h"
-#include <QDebug>
-#include <unistd.h>
+#include <QMutex>
 
 int main(int argc, char *argv[])
 {
@@ -20,7 +19,9 @@ int main(int argc, char *argv[])
   ring_buffer_t ring_buffer;
   ring_buffer_init(&ring_buffer);
 
-  ADCreader adcReader(ring_buffer);
+  QMutex mutex;
+
+  ADCreader adcReader(ring_buffer, mutex);
   adcReader.start();
 
   return a.exec();

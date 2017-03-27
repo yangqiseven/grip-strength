@@ -1,24 +1,27 @@
 #include "adcreader.h"
-//#include "ringBuffer.h"
 #include <QDebug>
-//#include "global.h"
 #include <QMutex>
 
-ADCreader::ADCreader(ring_buffer_t &buffer) : ring_buffer(buffer)
+ADCreader::ADCreader(ring_buffer_t &buffer, QMutex &mutex) : ring_buffer(buffer), mutex(mutex)
 {
 }
 
 void ADCreader::run()
 {
     uint8_t count = 1;
+    uint8_t buf = 1;
 
 	running = true;
 	while (running) {
         qDebug() << count;
-        //mutex.lock();
+        mutex.lock();
         ring_buffer_queue(&ring_buffer, count);
-        //mutex.unlock();
+        mutex.unlock();
         count += 1;
+        if (ring_buffer_is_full(&ring_buffer)) {
+            while(ring_buffer_dequeue(&ring_buffer, &buf) > 0) {}
+            count = 0;
+        }
         usleep(100000);
     }
 }
