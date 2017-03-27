@@ -9,7 +9,6 @@ ADCreader::ADCreader(ring_buffer_t &buffer, QMutex &mutex) : ring_buffer(buffer)
 void ADCreader::run()
 {
     uint8_t count = 1;
-    uint8_t buf = 1;
 
 	running = true;
 	while (running) {
