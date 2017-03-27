@@ -13,8 +13,6 @@ int main(int argc, char *argv[])
 
   QApplication a(argc, argv);
 
-  MainWindow w;
-  w.show();
 
   ring_buffer_t ring_buffer;
   ring_buffer_init(&ring_buffer);
@@ -23,6 +21,10 @@ int main(int argc, char *argv[])
 
   ADCreader adcReader(ring_buffer, mutex);
   adcReader.start();
+
+  MainWindow w(0, ring_buffer, mutex);
+  w.show();
+
 
   return a.exec();
 }

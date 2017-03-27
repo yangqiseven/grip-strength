@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QTimer>
 #include "qcustomplot.h"
+#include "ringBuffer.h"
+#include <QMutex>
 
 namespace Ui {
 class MainWindow;
@@ -14,7 +16,7 @@ class MainWindow : public QMainWindow
   Q_OBJECT
 
 public:
-  explicit MainWindow(QWidget *parent = 0);
+  MainWindow(QWidget *parent, ring_buffer_t &buffer, QMutex &mutex);
   ~MainWindow();
 
   void grip_strength(QCustomPlot *customPlot);
@@ -27,7 +29,8 @@ private slots:
 private:
   Ui::MainWindow *ui;
   QTimer dataTimer;
-
+  ring_buffer_t& ring_buffer;
+  QMutex& mutex;
 };
 
 #endif // MAINWINDOW_H
