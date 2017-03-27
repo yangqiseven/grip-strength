@@ -18,8 +18,7 @@ void ADCreader::run()
         ring_buffer_queue(&ring_buffer, count);
         mutex.unlock();
         count += 1;
-        if (ring_buffer_is_full(&ring_buffer)) {
-            while(ring_buffer_dequeue(&ring_buffer, &buf) > 0) {}
+        if (count == 128) {
             count = 0;
         }
         usleep(100000);
