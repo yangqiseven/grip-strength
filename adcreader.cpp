@@ -1,13 +1,22 @@
 #include "adcreader.h"
+//#include "ringBuffer.h"
 #include <QDebug>
+#include "global.h"
+#include <QMutex>
 
 void ADCreader::run()
 {
+    uint8_t count = 1;
+
 	running = true;
 	while (running) {
-		qDebug() << "Tick";
-		sleep(1);
-	}
+        qDebug() << count;
+        mutex.lock();
+        ring_buffer_queue(&ring_buffer, count);
+        mutex.unlock();
+        count += 1;
+        usleep(100000);
+    }
 }
 
 void ADCreader::quit()
@@ -15,3 +24,5 @@ void ADCreader::quit()
 	running = false;
 	exit(0);
 }
+
+
