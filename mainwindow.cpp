@@ -14,7 +14,6 @@ MainWindow::MainWindow(QWidget *parent, ring_buffer_t &buffer, QMutex &mutex) :
   mutex(mutex)
 {
   ui->setupUi(this);
-  setGeometry(400, 250, 542, 390);
 
   grip_strength(ui->customPlot);
   ui->customPlot->replot();

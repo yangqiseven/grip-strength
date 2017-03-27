@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
   adcReader.start();
 
   MainWindow w(0, ring_buffer, mutex);
-  w.show();
+  w.showFullScreen();
 
 
   return a.exec();
