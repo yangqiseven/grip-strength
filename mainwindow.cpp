@@ -14,20 +14,12 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->setupUi(this);
   setGeometry(400, 250, 542, 390);
 
-  setupDemo();
+  grip_strength(ui->customPlot);
+  ui->customPlot->replot();
 
 }
 
-void MainWindow::setupDemo()
-{
-
-    setupRealtimeDataDemo(ui->customPlot);
-    ui->customPlot->replot();
-}
-
-
-
-void MainWindow::setupRealtimeDataDemo(QCustomPlot *customPlot)
+void MainWindow::grip_strength(QCustomPlot *customPlot)
 {
 
   customPlot->addGraph(); // blue line

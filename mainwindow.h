@@ -17,8 +17,7 @@ public:
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
 
-  void setupDemo();
-  void setupRealtimeDataDemo(QCustomPlot *customPlot);
+  void grip_strength(QCustomPlot *customPlot);
 
 
 
