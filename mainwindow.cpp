@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent, ring_buffer_t &buffer, QMutex &mutex) :
   QMainWindow(parent),
   ui(new Ui::MainWindow),
   ring_buffer(buffer),
-  mutex(mutex)
+  mutex(mutex),
+  max(0)
 {
   ui->setupUi(this);
 
@@ -61,7 +62,6 @@ void MainWindow::realtimeDataSlot()
   static QTime time(QTime::currentTime());
   double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
   uint8_t buf = 0;
-  static uint8_t max = 0;
 
   // add data to lines:
   mutex.lock();
