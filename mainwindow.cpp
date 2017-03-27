@@ -23,8 +23,6 @@ MainWindow::MainWindow(QWidget *parent, ring_buffer_t &buffer, QMutex &mutex) :
 
 void MainWindow::grip_strength(QCustomPlot *customPlot)
 {
-  int i = 0;
-
   customPlot->addGraph(); // blue line
   customPlot->graph(0)->setPen(QPen(QColor(40, 110, 255)));
 
