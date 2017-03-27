@@ -13,7 +13,6 @@ void ADCreader::run()
 
 	running = true;
 	while (running) {
-        qDebug() << count;
         mutex.lock();
         ring_buffer_queue(&ring_buffer, count);
         mutex.unlock();
