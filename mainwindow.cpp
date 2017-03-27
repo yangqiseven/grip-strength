@@ -50,16 +50,19 @@ void MainWindow::realtimeDataSlot()
 {
   static QTime time(QTime::currentTime());
   double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
-  static double lastPointKey = 0;
-  if (key-lastPointKey > 0.002) // at most add point every 2 ms
-  {
-    // add data to lines:
-    ui->customPlot->graph(0)->addData(key, qSin(key)+qrand()/(double)RAND_MAX*1*qSin(key/0.3843));
-    // rescale value (vertical) axis to fit the current data:
-    //ui->customPlot->graph(0)->rescaleValueAxis();
-    //ui->customPlot->graph(1)->rescaleValueAxis(true);
-    lastPointKey = key;
+  uint8_t buf = 0;
+
+  // add data to lines:
+  mutex.lock();
+  while(ring_buffer_dequeue(&ring_buffer, &buf) > 0) { // empty buffer
+    ui->customPlot->graph(0)->addData(key, buf);
   }
+  mutex.unlock();
+
+  // rescale value (vertical) axis to fit the current data:
+  //ui->customPlot->graph(0)->rescaleValueAxis();
+  //ui->customPlot->graph(1)->rescaleValueAxis(true);
+
   // make key axis range scroll with the data (at a constant range size of 8):
   ui->customPlot->xAxis->setRange(key, 8, Qt::AlignRight);
   ui->customPlot->replot();
