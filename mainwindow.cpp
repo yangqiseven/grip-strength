@@ -34,6 +34,8 @@ void MainWindow::grip_strength(QCustomPlot *customPlot)
   customPlot->xAxis->setTicker(timeTicker);
   customPlot->axisRect()->setupFullAxesBox();
   customPlot->yAxis->setRange(0, 130);
+  customPlot->xAxis->setLabel("Time (s)");
+  customPlot->yAxis->setLabel("Force (kg)");
 
   // make left and bottom axes transfer their ranges to right and top axes:
   connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis2, SLOT(setRange(QCPRange)));
