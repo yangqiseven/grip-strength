@@ -14,12 +14,18 @@ lessThan(QT_MAJOR_VERSION, 5): LIBS += -lqwt -lm
 HEADERS += adcreader.h \
     mainwindow.h \
     qcustomplot.h \
-    ringBuffer.h
+    ringBuffer.h \
+    ad7705.h \
+    gz_clk.h \
+    gpio-sysfs.h
 
 SOURCES += main.cpp adcreader.cpp \
     mainwindow.cpp \
     qcustomplot.cpp \
-    ringBuffer.c
+    ringBuffer.c \
+    ad7705.cpp \
+    gz_clk.cpp \
+    gpio-sysfs.cpp
 
 FORMS += \
     mainwindow.ui
