@@ -31,7 +31,7 @@ private:
   QTimer dataTimer;
   ring_buffer_t& ring_buffer;
   QMutex& mutex;
-  uint8_t max;
+  uint16_t max;
 };
 
 #endif // MAINWINDOW_H

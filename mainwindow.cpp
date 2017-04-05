@@ -34,7 +34,7 @@ void MainWindow::grip_strength(QCustomPlot *customPlot)
   timeTicker->setTimeFormat("%h:%m:%s");
   customPlot->xAxis->setTicker(timeTicker);
   customPlot->axisRect()->setupFullAxesBox();
-  customPlot->yAxis->setRange(0, 130);
+  customPlot->yAxis->setRange(0, 100);
   customPlot->xAxis->setLabel("Time (s)");
   customPlot->yAxis->setLabel("Force (kg)");
 
@@ -51,7 +51,7 @@ void MainWindow::grip_strength(QCustomPlot *customPlot)
 
   // setup a timer that repeatedly calls MainWindow::realtimeDataSlot:
   connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
-  dataTimer.start(15); // Interval is in ms 0 means to refresh as fast as possible
+  dataTimer.start(20); // Interval is in ms 0 means to refresh as fast as possible
 }
 
 
@@ -59,19 +59,26 @@ void MainWindow::realtimeDataSlot()
 {
   static QTime time(QTime::currentTime());
   double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
-  uint8_t buf = 0;
+  uint16_t buf = 0;
+  static bool first = false;
 
   // add data to lines:
   mutex.lock();
   while(ring_buffer_dequeue(&ring_buffer, &buf) > 0) { // empty buffer
-    if (buf > max){
+
+    buf = (buf-400)/324; //convert value to kg
+    if ((buf > max) && (first)){ //ignore first sample
         max = buf; // check for max value
     }
-    ui->customPlot->graph(0)->addData(key, buf);
-    ui->customPlot->graph(1)->addData(key, max);
-    ui->customPlot->graph(0)->setName("Current Force: " + QString::number(buf));
-    ui->customPlot->graph(1)->setName("Maximum Force: " + QString::number(max));
-  }
+    //fprintf(stderr,"data = %d       \r",buf);
+    if (first) { //ignore first sample
+      ui->customPlot->graph(0)->addData(key, buf);
+      ui->customPlot->graph(1)->addData(key, max);
+      ui->customPlot->graph(0)->setName("Current Force: " + QString::number(buf));
+      ui->customPlot->graph(1)->setName("Maximum Force: " + QString::number(max));
+    } 
+    first = true; 
+}
   mutex.unlock();
 
   // rescale value (vertical) axis to fit the current data:
@@ -79,7 +86,7 @@ void MainWindow::realtimeDataSlot()
   //ui->customPlot->graph(1)->rescaleValueAxis(true);
 
   // make key axis range scroll with the data (at a constant range size of 8):
-  ui->customPlot->xAxis->setRange(key, 8, Qt::AlignRight);
+  ui->customPlot->xAxis->setRange(key, 20, Qt::AlignRight);
   ui->customPlot->replot();
 }
 
