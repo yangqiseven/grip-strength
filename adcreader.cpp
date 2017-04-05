@@ -181,14 +181,14 @@ void ADCreader::run()
           fprintf(stderr,"Poll error %d\n",ret);
         }
 
-        // tell the AD7705 to read the data register (16 bits)
+	// tell the AD7705 to read the data register (16 bits)
         writeReg(fd,0x38);
         // read the data register by performing two 8 bit reads
-        int value = readData(fd)-0x8000;
+        uint16_t value = readData(fd)-0x8000;
+	//fprintf(stderr,"data = %d       \r",value);
         mutex.lock();
         ring_buffer_queue(&ring_buffer, value);
         mutex.unlock();
-        usleep(10000); //sample every 10 ms
     }
 }
 
