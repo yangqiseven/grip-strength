@@ -188,6 +188,7 @@ void ADCreader::run()
         mutex.lock();
         ring_buffer_queue(&ring_buffer, value);
         mutex.unlock();
+        usleep(10000); //sample every 10 ms
     }
 }
 
