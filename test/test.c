@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
-#include "../ringBuffer.h"
+#include "../src/ringBuffer.h"
 
 int main(void) {
         //Create and initialize ring buffer
