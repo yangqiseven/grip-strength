@@ -41,17 +41,17 @@ make
 To run the program:
 
 ```
-startx ./grip-strength
+startx ./build/grip-strength
 ```
 
 ## Testing
 
-As it is difficult to test both the GUi thread and the thread which reads from the ADC (as it needs to interface with physical hardware) the project currently only tests the ring buffer (which is used to store data between the two threads) implementation. The file `test.c` is used to check assumptions using assert.
+As it is difficult to test both the GUI thread and the thread which reads from the ADC (as it needs to interface with physical hardware) the project currently only tests the ring buffer (which is used to store data between the two threads) implementation. The file `test.c` is used to check assumptions using assert.
 
 To complie:
 
 ```
-gcc -std=c99 -o test/buffer test/test.c  ringBuffer.c
+gcc -std=c99 -o test/buffer test/test.c  src/ringBuffer.c
 ```
 
 To run:
