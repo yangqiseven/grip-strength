@@ -51,7 +51,7 @@ As it is difficult to test both the GUi thread and the thread which reads from t
 To complie:
 
 ```
-gcc -std=c99 -o test/buffer test.c  ringBuffer.c
+gcc -std=c99 -o test/buffer test/test.c  ringBuffer.c
 ```
 
 To run:
