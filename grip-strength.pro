@@ -6,11 +6,11 @@ CONFIG          += qt warn_on debug
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-Release:DESTDIR = build
-Release:OBJECTS_DIR = build/.obj
-Release:MOC_DIR = build/.moc
-Release:RCC_DIR = build/.rcc
-Release:UI_DIR = build/.ui
+DESTDIR = build
+OBJECTS_DIR = build
+MOC_DIR = build
+RCC_DIR = build
+UI_DIR = build
 
 TARGET = grip-strength
 
