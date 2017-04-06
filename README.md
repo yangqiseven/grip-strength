@@ -29,9 +29,17 @@ sudo raspi-config
 
 In addition, you need to have an X server such as [Xorg](https://www.x.org/wiki/) running for `startx` to display the graphical output.
 
+### Download
+
+To download this program, use `git clone`:
+
+```
+git clone https://github.com/michaelorr92/grip-strength
+```
+
 ### Compiling & Running
 
-To compile the program use `qmake`, which generates a makefile, you can then run `make` to compile an output program file.
+To compile the program use `qmake` (from the root directory), which generates a makefile, you can then run `make` to compile an output program file.
 
 ```
 qmake
