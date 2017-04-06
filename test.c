@@ -3,14 +3,13 @@
 #include "ringBuffer.h"
 
 int main(void) {
-
         //Create and initialize ring buffer
 
         ring_buffer_t ring_buffer;
         ring_buffer_init(&ring_buffer);
 
-        int i = 0;
-        int buf = 0;
+        uint16_t i = 0;
+        uint16_t buf = 0;
 
         // Partially fill buffer
         for (i = 0; i < 100; i++) {
@@ -32,8 +31,8 @@ int main(void) {
         assert(ring_buffer_is_empty(&ring_buffer));
 
         // Put too much data in buffer
-        for(i = 0; i < 1000; i++) {
-                ring_buffer_queue(&ring_buffer, (i % 127));
+        for(i = 0; i < 2500; i++) {
+                ring_buffer_queue(&ring_buffer, (i % 2047));
         }
 
         // Check if buffer is full
@@ -47,4 +46,5 @@ int main(void) {
         // Check if buffer is empty
         assert(ring_buffer_is_empty(&ring_buffer));
 
+        return(0);
 }
