@@ -26,7 +26,7 @@ extern "C" {
 #ifndef GZ_CLK_H
 #define GZ_CLK_H
 
-#include<bcm2835.h>
+#include <bcm2835.h>
 
 #define GZ_CLK_5MHz 0
 #define GZ_CLK_125MHz 1

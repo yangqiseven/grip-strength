@@ -28,9 +28,9 @@ typedef struct ring_buffer_t ring_buffer_t;
 
 
 struct ring_buffer_t {
-  uint16_t buffer[RING_BUFFER_SIZE];
-  ring_buffer_size_t tail_index;
-  ring_buffer_size_t head_index;
+        uint16_t buffer[RING_BUFFER_SIZE];
+        ring_buffer_size_t tail_index;
+        ring_buffer_size_t head_index;
 };
 
 void ring_buffer_init(ring_buffer_t *buffer);
@@ -45,19 +45,19 @@ uint16_t ring_buffer_dequeue(ring_buffer_t *buffer, uint16_t *data);
 // Returns whether a ring buffer is empty.
 
 inline uint16_t ring_buffer_is_empty(ring_buffer_t *buffer) {
-  return (buffer->head_index == buffer->tail_index);
+        return (buffer->head_index == buffer->tail_index);
 }
 
 // Returns whether a ring buffer is full.
 
 inline uint16_t ring_buffer_is_full(ring_buffer_t *buffer) {
-  return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK) == RING_BUFFER_MASK;
+        return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK) == RING_BUFFER_MASK;
 }
 
 // Returns the number of items in a ring buffer.
 
 inline ring_buffer_size_t ring_buffer_num_items(ring_buffer_t *buffer) {
-  return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK);
+        return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK);
 }
 
 #endif /* RINGBUFFER_H */
