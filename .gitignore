@@ -3,5 +3,6 @@ moc*
 grip-strength.pro.user
 Makefile
 build/
+test/
 ui*
 grip-strength
