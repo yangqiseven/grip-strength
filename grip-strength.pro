@@ -6,24 +6,30 @@ CONFIG          += qt warn_on debug
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+Release:DESTDIR = build
+Release:OBJECTS_DIR = build/.obj
+Release:MOC_DIR = build/.moc
+Release:RCC_DIR = build/.rcc
+Release:UI_DIR = build/.ui
+
 TARGET = grip-strength
 
 greaterThan(QT_MAJOR_VERSION, 4): LIBS += -lbcm2835 -lm
 lessThan(QT_MAJOR_VERSION, 5): LIBS += -lbcm2835 -lm
 
-HEADERS += adcreader.h \
-    mainwindow.h \
-    qcustomplot.h \
-    ringBuffer.h \
-    gz_clk.h \
-    gpio-sysfs.h
+HEADERS += src\adcreader.h \
+    src\mainwindow.h \
+    src\qcustomplot.h \
+    src\ringBuffer.h \
+    src\gz_clk.h \
+    src\gpio-sysfs.h
 
-SOURCES += main.cpp adcreader.cpp \
-    mainwindow.cpp \
-    qcustomplot.cpp \
-    ringBuffer.c \
-    gz_clk.cpp \
-    gpio-sysfs.cpp
+SOURCES += src\main.cpp src\adcreader.cpp \
+    src\mainwindow.cpp \
+    src\qcustomplot.cpp \
+    src\ringBuffer.c \
+    src\gz_clk.cpp \
+    src\gpio-sysfs.cpp
 
 FORMS += \
-    mainwindow.ui
+    src\mainwindow.ui
