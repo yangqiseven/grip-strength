@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QMetaEnum>
 #include <QString>
+#include <math.h>
 
 MainWindow::MainWindow(QWidget *parent, ring_buffer_t &buffer, QMutex &mutex) :
         QMainWindow(parent),
@@ -60,22 +61,23 @@ void MainWindow::realtimeDataSlot()
         static QTime time(QTime::currentTime());
         double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
         uint16_t buf = 0;
+	float value = 0;
         static bool first = false; // tjis flag is used to ignore the first sample as it is always max
 
         // add data to lines:
         mutex.lock();
         while(ring_buffer_dequeue(&ring_buffer, &buf) > 0) { // empty buffer
 
-                buf = (buf-400)/324; // convert value to kg
-
-                if ((buf > max) && (first)) { // ignore first sample as it is always max
-                        max = buf; // check for max value
+                value = (buf-400.0)/324.0; // convert to kg
+		value = roundf(value * 100) / 100; // round to 2 decimal places
+                if ((value > max) && (first)) { // ignore first sample as it is always max
+                        max = value; // check for max value
                 }
 
                 if (first) { //ignore first sample as it is always max
-                        ui->customPlot->graph(0)->addData(key, buf);
+                        ui->customPlot->graph(0)->addData(key, value);
                         ui->customPlot->graph(1)->addData(key, max);
-                        ui->customPlot->graph(0)->setName("Current Force: " + QString::number(buf));
+                        ui->customPlot->graph(0)->setName("Current Force: " + QString::number(value));
                         ui->customPlot->graph(1)->setName("Maximum Force: " + QString::number(max));
                 }
                 first = true;
