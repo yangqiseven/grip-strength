@@ -54,6 +54,12 @@ To complie:
 gcc -std=c99 -o test/buffer test.c  ringBuffer.c
 ```
 
+To run:
+
+```
+./test/buffer
+```
+
 
 ## Acknowledgements
 
