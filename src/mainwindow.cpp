@@ -68,7 +68,7 @@ void MainWindow::realtimeDataSlot()
         mutex.lock();
         while(ring_buffer_dequeue(&ring_buffer, &buf) > 0) { // empty buffer
 
-                value = (buf-400.0)/324.0; // convert to kg
+                value = (buf-322.0)/324.0; // convert to kg
 		value = roundf(value * 100) / 100; // round to 2 decimal places
                 if ((value > max) && (first)) { // ignore first sample as it is always max
                         max = value; // check for max value
