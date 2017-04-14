@@ -12,6 +12,16 @@ The program uses QT4 to graphically plot the data.
 
 ## Hardware setup
 
+There is a pre-routed PCB file located at:
+
+```
+hardware/grip_strength_board.brd
+```
+
+It is relatively simple to fabricate. There is more information about the hardware design in the project wiki.
+
+Once fabricated the PCB mounts directly on the GPIO pins such that the last row of the PCB header is on the 13th row of the GPIO pins.
+
 ## Installation & Usage
 
 ### Pre-requisites & Dependencies
